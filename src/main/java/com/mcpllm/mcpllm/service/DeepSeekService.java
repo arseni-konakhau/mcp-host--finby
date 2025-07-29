@@ -16,7 +16,7 @@ public class DeepSeekService {
     private final DeepSeekProperties properties;
 
     public DeepSeekService(@Qualifier("deepSeekWebClient") WebClient deepSeekWebClient, 
-                          DeepSeekProperties properties) {
+                        DeepSeekProperties properties) {
         this.deepSeekWebClient = deepSeekWebClient;
         this.properties = properties;
     }
