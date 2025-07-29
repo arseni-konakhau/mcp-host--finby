@@ -2,7 +2,7 @@
 ### This file contains HTTP requests for testing the MCP-LLM service using VSCode REST Client extension
 
 ### Variables
-@baseUrl = http://localhost:8080
+@baseUrl = http://localhost:3334
 @apiKey = your-api-key-here
 
 ### Health Check - Basic connectivity test
