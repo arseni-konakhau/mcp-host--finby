@@ -1,0 +1,286 @@
+### MCP-LLM API Validation Tests
+### This file contains HTTP requests for testing the MCP-LLM service using VSCode REST Client extension
+
+### Variables
+@baseUrl = http://localhost:8080
+@apiKey = your-api-key-here
+
+### Health Check - Basic connectivity test
+GET {{baseUrl}}/api/chat/health
+Accept: application/json
+
+###
+
+### Health Check with Actuator endpoint
+GET {{baseUrl}}/actuator/health
+Accept: application/json
+
+###
+
+### Basic Chat Message - Simple text without MCP actions
+POST {{baseUrl}}/api/chat/message
+Content-Type: application/json
+Accept: application/json
+
+{
+  "message": "Hello, how are you?",
+  "userId": "test-user-001"
+}
+
+###
+
+### Chat Message with Context - Including user context
+POST {{baseUrl}}/api/chat/message
+Content-Type: application/json
+Accept: application/json
+
+{
+  "message": "What's the weather like today?",
+  "context": {
+    "location": "New York",
+    "timezone": "EST"
+  },
+  "userId": "test-user-002"
+}
+
+###
+
+### Jira-related Query - Should trigger MCP actions
+POST {{baseUrl}}/api/chat/message
+Content-Type: application/json
+Accept: application/json
+
+{
+  "message": "Show me all open issues assigned to me in project ABC",
+  "context": {
+    "jiraProject": "ABC",
+    "userEmail": "test@example.com"
+  },
+  "userId": "test-user-003"
+}
+
+###
+
+### Confluence-related Query - Should trigger MCP actions
+POST {{baseUrl}}/api/chat/message
+Content-Type: application/json
+Accept: application/json
+
+{
+  "message": "Find all pages in the Engineering space that mention 'API documentation'",
+  "context": {
+    "confluenceSpace": "ENG",
+    "searchTerm": "API documentation"
+  },
+  "userId": "test-user-004"
+}
+
+###
+
+### Complex Jira Operation - Create issue request
+POST {{baseUrl}}/api/chat/message
+Content-Type: application/json
+Accept: application/json
+
+{
+  "message": "Create a new bug ticket with title 'Login page not loading' and assign it to john.doe@company.com",
+  "context": {
+    "issueType": "Bug",
+    "priority": "High",
+    "project": "WEB"
+  },
+  "userId": "test-user-005"
+}
+
+###
+
+### Multi-service Query - Combining Jira and Confluence
+POST {{baseUrl}}/api/chat/message
+Content-Type: application/json
+Accept: application/json
+
+{
+  "message": "Find documentation for the user authentication feature and check if there are any related open bugs",
+  "context": {
+    "feature": "user-authentication",
+    "services": ["confluence", "jira"]
+  },
+  "userId": "test-user-006"
+}
+
+###
+
+### Error Test - Empty message (should fail validation)
+POST {{baseUrl}}/api/chat/message
+Content-Type: application/json
+Accept: application/json
+
+{
+  "message": "",
+  "userId": "test-user-error"
+}
+
+###
+
+### Error Test - Missing required field (should fail validation)
+POST {{baseUrl}}/api/chat/message
+Content-Type: application/json
+Accept: application/json
+
+{
+  "userId": "test-user-error"
+}
+
+###
+
+### Long Message Test - Testing with longer input
+POST {{baseUrl}}/api/chat/message
+Content-Type: application/json
+Accept: application/json
+
+{
+  "message": "I need to understand the current status of our microservices architecture project. Can you help me find all related Jira epics, their current progress, any blockers, and also check if there's documentation in Confluence about the deployment strategy? I'm particularly interested in the authentication service and the API gateway components.",
+  "context": {
+    "project": "microservices-architecture",
+    "components": ["authentication-service", "api-gateway"],
+    "priority": "high"
+  },
+  "userId": "test-user-007"
+}
+
+###
+
+### Special Characters Test - Testing with special characters
+POST {{baseUrl}}/api/chat/message
+Content-Type: application/json
+Accept: application/json
+
+{
+  "message": "Search for issues with title containing 'API & Database' or 'User's Profile'",
+  "context": {
+    "searchType": "title",
+    "specialChars": true
+  },
+  "userId": "test-user-008"
+}
+
+###
+
+### Performance Test - Multiple rapid requests
+POST {{baseUrl}}/api/chat/message
+Content-Type: application/json
+Accept: application/json
+
+{
+  "message": "Quick status check - any critical issues?",
+  "userId": "perf-test-001"
+}
+
+###
+
+POST {{baseUrl}}/api/chat/message
+Content-Type: application/json
+Accept: application/json
+
+{
+  "message": "Quick status check - any critical issues?",
+  "userId": "perf-test-002"
+}
+
+###
+
+POST {{baseUrl}}/api/chat/message
+Content-Type: application/json
+Accept: application/json
+
+{
+  "message": "Quick status check - any critical issues?",
+  "userId": "perf-test-003"
+}
+
+###
+
+### Actuator Info Endpoint
+GET {{baseUrl}}/actuator/info
+Accept: application/json
+
+###
+
+### Test with API Key (if security is enabled)
+POST {{baseUrl}}/api/chat/message
+Content-Type: application/json
+Accept: application/json
+X-API-Key: {{apiKey}}
+
+{
+  "message": "Secure request test - show me project statistics",
+  "context": {
+    "secure": true
+  },
+  "userId": "secure-user-001"
+}
+
+###
+
+### CORS Test - Preflight request simulation
+OPTIONS {{baseUrl}}/api/chat/message
+Origin: http://localhost:3000
+Access-Control-Request-Method: POST
+Access-Control-Request-Headers: Content-Type
+
+###
+
+### Content-Type Variations Test - Testing different content types
+POST {{baseUrl}}/api/chat/message
+Content-Type: application/json; charset=utf-8
+Accept: application/json
+
+{
+  "message": "Testing with explicit charset",
+  "userId": "charset-test"
+}
+
+###
+
+### Large Context Test - Testing with extensive context
+POST {{baseUrl}}/api/chat/message
+Content-Type: application/json
+Accept: application/json
+
+{
+  "message": "Analyze the current sprint progress",
+  "context": {
+    "sprint": "Sprint-2024-Q1-03",
+    "team": "Backend Development",
+    "projects": ["project-alpha", "project-beta", "project-gamma"],
+    "metrics": {
+      "velocity": 45,
+      "burndown": "on-track",
+      "blockers": 2
+    },
+    "stakeholders": ["product-manager", "tech-lead", "scrum-master"],
+    "timeline": {
+      "start": "2024-01-15",
+      "end": "2024-01-29"
+    }
+  },
+  "userId": "test-user-009"
+}
+
+###
+
+### Unicode Test - Testing with international characters
+POST {{baseUrl}}/api/chat/message
+Content-Type: application/json; charset=utf-8
+Accept: application/json
+
+{
+  "message": "Найти все задачи со статусом 'В работе' и приоритетом 'Высокий' 🔥",
+  "context": {
+    "language": "ru",
+    "encoding": "utf-8"
+  },
+  "userId": "unicode-test-用户"
+}
+
+###
