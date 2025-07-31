@@ -21,6 +21,40 @@ public class McpClientService {
         this.properties = properties;
     }
 
+    public Mono<Map<String, Object>> executeJiraTool(String toolName, Map<String, Object> parameters) {
+        return mcpClientWebClient
+            .post()
+            .uri("/api/mcp/tools/" + toolName + "/execute")
+            .bodyValue(parameters)
+            .retrieve()
+            .bodyToMono(Map.class)
+            .map(map -> (Map<String, Object>) map)
+            .timeout(properties.client().timeout())
+            .onErrorResume(throwable -> {
+                Map<String, Object> errorMap = new HashMap<>();
+                errorMap.put("isError", true);
+                errorMap.put("error", "Failed to execute Jira tool " + toolName + ": " + throwable.getMessage());
+                return Mono.just(errorMap);
+            });
+    }
+
+    public Mono<Map<String, Object>> executeConfluenceTool(String toolName, Map<String, Object> parameters) {
+        return mcpClientWebClient
+            .post()
+            .uri("/api/mcp/tools/" + toolName + "/execute")
+            .bodyValue(parameters)
+            .retrieve()
+            .bodyToMono(Map.class)
+            .map(map -> (Map<String, Object>) map)
+            .timeout(properties.client().timeout())
+            .onErrorResume(throwable -> {
+                Map<String, Object> errorMap = new HashMap<>();
+                errorMap.put("isError", true);
+                errorMap.put("error", "Failed to execute Confluence tool " + toolName + ": " + throwable.getMessage());
+                return Mono.just(errorMap);
+            });
+    }
+
     public Mono<Map<String, Object>> executeJiraAction(String action, Map<String, Object> parameters) {
         var requestBody = Map.of(
             "service", "jira",
