@@ -13,7 +13,7 @@
 # 2. Ensure MCP client application is running on http://localhost:3332
 #    (Java service that bridges to MCP server)
 #
-# 3. Ensure MCP-LLM application is running on http://localhost:3335
+# 3. Ensure MCP-LLM application is running on http://localhost:3336
 #    Command: ./gradlew bootRun (with proper environment variables)
 #
 # 4. Set up environment variables for MCP-LLM:
@@ -26,7 +26,7 @@
 # =============================================
 # CONFIGURATION
 # =============================================
-@baseUrl = http://localhost:3335
+@baseUrl = http://localhost:3336
 @apiKey = your-api-key-here
 
 
@@ -1010,7 +1010,7 @@ Accept: application/json
 # Common issues and solutions:
 #
 # 1. MCP-LLM Service Issues:
-#    - Check if service is running on port 3335
+#    - Check if service is running on port 3336
 #    - Verify environment variables (DEEPSEEK_API_TOKEN)
 #    - Check application logs for startup errors
 #    - Ensure Java 17+ is installed
