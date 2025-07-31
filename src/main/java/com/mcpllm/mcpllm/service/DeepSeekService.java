@@ -19,6 +19,12 @@ public class DeepSeekService {
                         DeepSeekProperties properties) {
         this.deepSeekWebClient = deepSeekWebClient;
         this.properties = properties;
+        
+        // Debug logging to verify property injection
+        System.out.println("DeepSeek Properties:");
+        System.out.println("API URL: " + properties.apiUrl());
+        System.out.println("API Token: " + (properties.apiToken() != null ? "*****" + properties.apiToken().substring(properties.apiToken().length() - 4) : "null"));
+        System.out.println("Timeout: " + properties.timeout());
     }
 
     public Mono<String> generateResponse(String userMessage, String systemPrompt) {
@@ -35,6 +41,7 @@ public class DeepSeekService {
         return deepSeekWebClient
             .post()
             .uri("/v1/chat/completions")
+            .header("Authorization", "Bearer " + properties.apiToken())
             .bodyValue(requestBody)
             .retrieve()
             .bodyToMono(Map.class)

@@ -129,6 +129,9 @@ Health check endpoint.
 # Run
 ./gradlew bootRun
 
+# RUN Dev
+./gradlew bootRun --continuous
+
 # With custom properties
 DEEPSEEK_API_TOKEN=your_token ./gradlew bootRun
 ```
