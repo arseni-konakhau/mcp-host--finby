@@ -166,7 +166,7 @@ Content-Type: application/json
 Accept: application/json
 
 {
-  "message": "Show me all open JIRA issues",
+  "message": "Show me all JIRA issues",
   "context": {
     "jiraProject": "SMP"
   },
@@ -182,7 +182,7 @@ Content-Type: application/json
 Accept: application/json
 
 {
-  "message": "Show me all open JIRA issues",
+  "message": "Show me all JIRA issues",
   "userId": "test-user-jira-001"
 }
 
