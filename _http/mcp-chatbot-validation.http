@@ -153,7 +153,7 @@ Content-Type: application/json
 Accept: application/json
 
 {
-  "message": "Show me all open issues in project SMP",
+  "message": "Show me all open JIRA issues",
   "context": {
     "jiraProject": "SMP"
   },
@@ -161,6 +161,20 @@ Accept: application/json
 }
 
 ### Expected Response: ChatResponse with intent.type = "MCP_ACTION" and mcpResult containing Jira issues
+
+
+### 3.1a Jira Search - Basic issue search (SHOULD trigger MCP): rm "context" from payload
+POST {{baseUrl}}/api/chat/message
+Content-Type: application/json
+Accept: application/json
+
+{
+  "message": "Show me all open JIRA issues",
+  "userId": "test-user-jira-001"
+}
+
+### Expected Response: ChatResponse with intent.type = "MCP_ACTION" and mcpResult containing Jira issues
+
 
 ### 3.2 Jira User Issues - Personal assignment query (SHOULD trigger MCP)
 POST {{baseUrl}}/api/chat/message
