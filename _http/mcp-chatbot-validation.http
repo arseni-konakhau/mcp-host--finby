@@ -160,23 +160,8 @@ Accept: application/json
 # =============================================
 # =============================================
 
-### 3.1 Jira Search - Basic issue search (SHOULD trigger MCP)
-POST {{baseUrl}}/api/chat/message
-Content-Type: application/json
-Accept: application/json
 
-{
-  "message": "Show me all JIRA issues",
-  "context": {
-    "jiraProject": "SMP"
-  },
-  "userId": "test-user-jira-001"
-}
-
-### Expected Response: ChatResponse with intent.type = "MCP_ACTION" and mcpResult containing Jira issues
-
-
-### 3.1a Jira Search - Basic issue search (SHOULD trigger MCP): rm "context" from payload
+### 3.1 Jira Search - Basic issue search (SHOULD trigger MCP): rm "context" from payload
 POST {{baseUrl}}/api/chat/message
 Content-Type: application/json
 Accept: application/json
@@ -196,9 +181,6 @@ Accept: application/json
 
 {
   "message": "What issues are assigned to me in Jira?",
-  "context": {
-    "userEmail": "arseny.konohov2@gmail.com"
-  },
   "userId": "test-user-jira-002"
 }
 
@@ -211,9 +193,6 @@ Accept: application/json
 
 {
   "message": "Get details for issue SMP-1",
-  "context": {
-    "issueKey": "SMP-1"
-  },
   "userId": "test-user-jira-003"
 }
 
@@ -238,10 +217,6 @@ Accept: application/json
 
 {
   "message": "Show me the current active sprint for project SMP",
-  "context": {
-    "project": "SMP",
-    "sprintType": "active"
-  },
   "userId": "test-user-jira-005"
 }
 
@@ -253,12 +228,7 @@ Content-Type: application/json
 Accept: application/json
 
 {
-  "message": "Create a new bug ticket with title 'Login page not loading' in project SMP",
-  "context": {
-    "issueType": "Bug",
-    "priority": "High",
-    "project": "SMP"
-  },
+  "message": "Create a new issue in JIRA ticket with title 'TEST via mcp-llm' in project SMP",
   "userId": "test-user-jira-006"
 }
 
@@ -270,13 +240,7 @@ Content-Type: application/json
 Accept: application/json
 
 {
-  "message": "Find all high priority bugs in project SMP that are in progress and assigned to someone",
-  "context": {
-    "project": "SMP",
-    "priority": "High",
-    "issueType": "Bug",
-    "status": "In Progress"
-  },
+  "message": "Find all high priority bugs in JIRA project that are not completed",
   "userId": "test-user-jira-007"
 }
 
@@ -313,10 +277,7 @@ Content-Type: application/json
 Accept: application/json
 
 {
-  "message": "Find all pages about project documentation in Confluence",
-  "context": {
-    "searchTerm": "project documentation"
-  },
+  "message": "Find all pages in Confluence",
   "userId": "test-user-confluence-001"
 }
 
@@ -329,10 +290,6 @@ Accept: application/json
 
 {
   "message": "Show me all pages in the DEV space that mention API",
-  "context": {
-    "confluenceSpace": "DEV",
-    "searchTerm": "API"
-  },
   "userId": "test-user-confluence-002"
 }
 
@@ -345,10 +302,6 @@ Accept: application/json
 
 {
   "message": "Get the content of the 'Project Documentation' page from DEV space",
-  "context": {
-    "pageTitle": "Project Documentation",
-    "space": "DEV"
-  },
   "userId": "test-user-confluence-003"
 }
 
@@ -361,11 +314,6 @@ Accept: application/json
 
 {
   "message": "Create a new page called 'API Testing Guide' in the DEV space with basic content about testing APIs",
-  "context": {
-    "pageTitle": "API Testing Guide",
-    "space": "DEV",
-    "contentType": "documentation"
-  },
   "userId": "test-user-confluence-004"
 }
 
@@ -400,10 +348,6 @@ Accept: application/json
 
 {
   "message": "Find documentation for the user authentication feature and check if there are any related open bugs in Jira",
-  "context": {
-    "feature": "user-authentication",
-    "services": ["confluence", "jira"]
-  },
   "userId": "test-user-multi-001"
 }
 
@@ -416,10 +360,6 @@ Accept: application/json
 
 {
   "message": "Give me a complete overview of project SMP including current issues, documentation, and sprint status",
-  "context": {
-    "project": "SMP",
-    "includeAll": true
-  },
   "userId": "test-user-multi-002"
 }
 
@@ -432,11 +372,6 @@ Accept: application/json
 
 {
   "message": "I need to understand the current status of our microservices architecture project. Can you help me find all related Jira epics, their current progress, any blockers, and also check if there's documentation in Confluence about the deployment strategy?",
-  "context": {
-    "project": "microservices-architecture",
-    "components": ["authentication-service", "api-gateway"],
-    "priority": "high"
-  },
   "userId": "test-user-multi-003"
 }
 
@@ -486,9 +421,6 @@ Accept: application/json
 
 {
   "message": "How do I improve my productivity?",
-  "context": {
-    "jiraProject": "SMP"
-  },
   "userId": "test-user-ambiguous-002"
 }
 
@@ -513,9 +445,6 @@ Accept: application/json
 
 {
   "message": "Please search Jira for all issues in project SMP that are assigned to me",
-  "context": {
-    "explicit": true
-  },
   "userId": "test-user-explicit-001"
 }
 
@@ -603,10 +532,6 @@ Accept: application/json
 
 {
   "message": "Search for issues with title containing 'API & Database' or 'User's Profile' with émojis 🔥 and special chars: @#$%^&*()",
-  "context": {
-    "searchType": "title",
-    "specialChars": true
-  },
   "userId": "test-user-unicode-用户"
 }
 
@@ -658,9 +583,6 @@ Accept: application/json
 
 {
   "message": "Show me 5 recent issues in project SMP",
-  "context": {
-    "limit": 5
-  },
   "userId": "perf-test-002"
 }
 
@@ -673,10 +595,6 @@ Accept: application/json
 
 {
   "message": "Give me a comprehensive analysis of all projects, including issue counts, active sprints, recent documentation updates, and team assignments",
-  "context": {
-    "comprehensive": true,
-    "includeAll": true
-  },
   "userId": "perf-test-003"
 }
 
