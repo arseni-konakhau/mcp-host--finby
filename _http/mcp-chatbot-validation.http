@@ -53,6 +53,21 @@ Accept: application/json
 
 ### Expected Response: Application info with version, build details, etc.
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 # =============================================
 # =============================================
 # GENERAL CHAT (NON-MCP) TESTS
@@ -110,6 +125,21 @@ Accept: application/json
 }
 
 ### Expected Response: General LLM response with calculation
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 # =============================================
 # =============================================
@@ -225,6 +255,25 @@ Accept: application/json
 
 ### Expected Response: ChatResponse with filtered search results
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 # =============================================
 # =============================================
 # CONFLUENCE-RELATED QUERIES (SHOULD TRIGGER MCP)
@@ -295,6 +344,22 @@ Accept: application/json
 
 ### Expected Response: ChatResponse with page creation result or read-only mode message
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 # =============================================
 # =============================================
 # MULTI-SERVICE QUERIES (SHOULD TRIGGER MCP)
@@ -349,6 +414,25 @@ Accept: application/json
 }
 
 ### Expected Response: ChatResponse with detailed feature analysis
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 # =============================================
 # =============================================
@@ -409,6 +493,27 @@ Accept: application/json
 }
 
 ### Expected Response: ChatResponse with MCP integration (SHOULD trigger MCP)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 # =============================================
 # =============================================
@@ -479,6 +584,27 @@ Accept: application/json
 }
 
 ### Expected Response: ChatResponse handling special characters correctly
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 # =============================================
 # =============================================
@@ -559,6 +685,27 @@ Accept: application/json
   "userId": "concurrent-test-003"
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 # =============================================
 # =============================================
 # SECURITY & AUTHENTICATION TESTS
@@ -592,6 +739,25 @@ Accept: application/json
 }
 
 ### Expected Response: HTTP 401 Unauthorized (if API key is required) or normal response (if not required)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 # =============================================
 # =============================================
