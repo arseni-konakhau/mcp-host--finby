@@ -170,7 +170,7 @@ public class ChatOrchestrationService {
                                 String statusName = status != null ? (String) status.get("name") : "Unknown";
                                 
                                 result.append("• ").append(key).append(": ").append(summary)
-                                      .append(" [Status: ").append(statusName).append("]\n");
+                                    .append(" [Status: ").append(statusName).append("]\n");
                             }
                             
                             return result.toString();

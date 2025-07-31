@@ -129,7 +129,7 @@ The application is now complete and ready for:
 
 ### JIRA Query Validation
 ```bash
-curl -X POST http://localhost:3334/api/chat/message \
+curl -X POST http://localhost:3335/api/chat/message \
   -H "Content-Type: application/json" \
   -d '{"message": "Show me all open JIRA issues", "userId": "test-user-jira-001"}'
 ```
@@ -141,7 +141,7 @@ curl -X POST http://localhost:3334/api/chat/message \
 
 ### Issue Details Query Validation
 ```bash
-curl -X POST http://localhost:3334/api/chat/message \
+curl -X POST http://localhost:3335/api/chat/message \
   -H "Content-Type: application/json" \
   -d '{"message": "Get details for issue SMP-1", "userId": "test-user-jira-002"}'
 ```
@@ -153,7 +153,7 @@ curl -X POST http://localhost:3334/api/chat/message \
 
 ### General Chat Validation
 ```bash
-curl -X POST http://localhost:3334/api/chat/message \
+curl -X POST http://localhost:3335/api/chat/message \
   -H "Content-Type: application/json" \
   -d '{"message": "Hello, how are you today?", "userId": "test-user-001"}'
 ```
