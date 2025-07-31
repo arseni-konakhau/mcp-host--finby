@@ -1,4 +1,4 @@
-# MCP-LLM Bridge Service
+# MCP Host (MCP-LLM Bridge Service / ChatBot)
 
 A Spring Boot service that acts as an intelligent bridge between Large Language Models (LLMs) and Model Context Protocol (MCP) clients. This service analyzes user intent and routes requests appropriately between direct LLM responses and MCP-based actions for Atlassian tools (Jira/Confluence).
 
