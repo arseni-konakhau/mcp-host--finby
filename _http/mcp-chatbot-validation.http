@@ -29,6 +29,19 @@
 @baseUrl = http://localhost:3334
 @apiKey = your-api-key-here
 
+
+
+
+
+
+
+
+
+
+
+
+
+
 # =============================================
 # =============================================
 # HEALTH CHECK / CONNECTIVITY
