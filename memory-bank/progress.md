@@ -66,7 +66,7 @@
 
 ### Service Dependencies
 - **DeepSeek API**: Ready for integration (requires API token)
-- **MCP Client**: Ready for integration (expects service on port 3332)
+- **MCP Client**: Ready for integration (expects service on port 3335)
 - **MCP Server (Atlassian)**: Indirect dependency through mcp-client
 
 ### Build and Runtime Status

@@ -62,7 +62,7 @@ Implementation of the complete MCP-LLM Spring Boot application that bridges natu
 
 ### Testing Requirements
 - Set up DeepSeek API token
-- Ensure mcp-client is running on localhost:3332
+- Ensure mcp-client is running on localhost:3335
 - Test various natural language inputs
 - Validate MCP tool execution flow
 
@@ -86,7 +86,7 @@ Implementation of the complete MCP-LLM Spring Boot application that bridges natu
 3. **Error Recovery**: Handling partial failures in multi-step operations
 
 ### Integration Points
-- **mcp-client**: Java service running on port 3332
+- **mcp-client**: Java service running on port 3335
 - **mcp-server--atlassian**: Python MCP server for Atlassian tools
 - **DeepSeek API**: External LLM service for natural language processing
 
@@ -121,7 +121,7 @@ The application is now complete and ready for:
 
 **Solution**: Updated ChatOrchestrationService.java with proper MCP integration logic:
 1. **Enhanced Intent Analysis**: Improved logic to detect when MCP operations should be triggered
-2. **MCP Client Integration**: Added proper integration with MCP client service on localhost:3332
+2. **MCP Client Integration**: Added proper integration with MCP client service on localhost:3335
 3. **Response Processing**: Implemented logic to process MCP results and format them appropriately
 4. **Error Handling**: Added robust error handling for MCP operations
 
@@ -166,7 +166,7 @@ curl -X POST http://localhost:3336/api/chat/message \
 ## Complete MCP Chain Validation ✅
 The full end-to-end chain is now working perfectly:
 1. **MCP-Host (mcp-llm)** ✅ - Receives user queries and orchestrates responses
-2. **MCP-Client (localhost:3332)** ✅ - Bridges between host and server
+2. **MCP-Client (localhost:3335)** ✅ - Bridges between host and server
 3. **MCP-Server (localhost:9000)** ✅ - Connects to Atlassian APIs
 
 ## Current State Summary

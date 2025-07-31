@@ -44,8 +44,8 @@ DEEPSEEK_API_TOKEN=your_deepseek_token
 # Optional API security
 API_KEY=your_api_key
 
-# MCP Client endpoint (default: http://localhost:3332)
-MCP_CLIENT_URL=http://localhost:3332
+# MCP Client endpoint (default: http://localhost:3335)
+MCP_CLIENT_URL=http://localhost:3335
 ```
 
 ### Application Properties
@@ -54,7 +54,7 @@ MCP_CLIENT_URL=http://localhost:3332
 intent.confidence.threshold=0.7
 
 # Service endpoints
-mcp.client.url=http://localhost:3332
+mcp.client.url=http://localhost:3335
 deepseek.api.url=https://api.deepseek.com
 
 # Timeouts

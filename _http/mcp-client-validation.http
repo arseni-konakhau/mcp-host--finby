@@ -5,14 +5,14 @@
 # =============================================
 # CONFIGURATION
 # =============================================
-@baseUrl = http://localhost:3332
+@baseUrl = http://localhost:3335
 @serverUrl = http://localhost:9000
 
 # =============================================
 # SETUP INSTRUCTIONS
 # =============================================
 # 1. Ensure Atlassian MCP server is running on http://localhost:9000
-# 2. Ensure MCP client application is running on http://localhost:3332
+# 2. Ensure MCP client application is running on http://localhost:3335
 # 3. Run tests in sequence to validate complete workflow
 # 4. Monitor server logs for detailed debugging information
 
@@ -1079,7 +1079,7 @@ GET {{baseUrl}}/api/mcp/ready
 # =============================================
 # 1. Check client logs for detailed error information
 # 2. Verify MCP server is running and accessible on localhost:9000
-# 3. Confirm MCP client is running and accessible on localhost:3332
+# 3. Confirm MCP client is running and accessible on localhost:3335
 # 4. Check network connectivity between client and server
 # 5. Validate MCP protocol compliance
 # 6. Monitor performance metrics during testing

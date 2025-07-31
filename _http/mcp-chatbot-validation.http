@@ -1,6 +1,6 @@
 ### MCP-LLM Chatbot API Validation Tests
 ### This file contains HTTP requests for testing the MCP-LLM service (MCP Host) using VSCode REST Client extension
-### Tests the complete chain: MCP-Host (mcp-llm) -> MCP-Client (localhost:3332) -> MCP-Server (localhost:9000)
+### Tests the complete chain: MCP-Host (mcp-llm) -> MCP-Client (localhost:3335) -> MCP-Server (localhost:9000)
 
 # =============================================
 # =============================================
@@ -10,7 +10,7 @@
 # 1. Ensure Atlassian MCP server is running on http://localhost:9000
 #    Command: uv run mcp-atlassian --transport streamable-http --port 9000 --env-file .env --verbose
 #
-# 2. Ensure MCP client application is running on http://localhost:3332
+# 2. Ensure MCP client application is running on http://localhost:3335
 #    (Java service that bridges to MCP server)
 #
 # 3. Ensure MCP-LLM application is running on http://localhost:3336
@@ -1016,7 +1016,7 @@ Accept: application/json
 #    - Ensure Java 17+ is installed
 #
 # 2. MCP Client Connection Issues:
-#    - Verify MCP client is running on port 3332
+#    - Verify MCP client is running on port 3335
 #    - Check network connectivity between services
 #    - Review MCP client logs for connection errors
 #    - Test MCP client independently using mcp-client-validation.http

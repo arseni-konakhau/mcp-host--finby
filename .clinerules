@@ -25,7 +25,7 @@ MCP-LLM is a Spring Boot application that serves as an intelligent bridge betwee
 
 ### Service Integration Points
 - **DeepSeek API**: External LLM service for natural language processing
-- **MCP Client**: Java service (port 3332) for MCP protocol communication
+- **MCP Client**: Java service (port 3335) for MCP protocol communication
 - **MCP Server**: Python Atlassian server (indirect via MCP client)
 
 ### Development Workflow
@@ -43,7 +43,7 @@ MCP-LLM is a Spring Boot application that serves as an intelligent bridge betwee
 ### Environment Requirements
 - Java 17+ (required for Spring Boot 3.x)
 - DeepSeek API token for LLM integration
-- MCP Client service running on localhost:3332
+- MCP Client service running on localhost:3335
 - Optional API key for endpoint security
 
 ### Project Status

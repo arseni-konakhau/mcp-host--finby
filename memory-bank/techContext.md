@@ -55,7 +55,7 @@ src/
 
 ### Environment Variables
 - `DEEPSEEK_API_TOKEN`: Authentication token for DeepSeek API
-- `MCP_CLIENT_URL`: Base URL for MCP client service (default: http://localhost:3332)
+- `MCP_CLIENT_URL`: Base URL for MCP client service (default: http://localhost:3335)
 - `API_KEY`: Optional API key for securing endpoints
 - `SERVER_PORT`: Application server port (default: 8080)
 
@@ -70,7 +70,7 @@ deepseek.api.base-url=https://api.deepseek.com
 deepseek.api.timeout=30s
 
 # MCP Client configuration
-mcp-llm.client.base-url=${MCP_CLIENT_URL:http://localhost:3332}
+mcp-llm.client.base-url=${MCP_CLIENT_URL:http://localhost:3335}
 mcp-llm.client.timeout=30s
 
 # Security configuration
