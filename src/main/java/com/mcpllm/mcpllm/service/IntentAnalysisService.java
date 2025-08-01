@@ -26,17 +26,17 @@ public class IntentAnalysisService {
             // Check for Jira-related keywords
             if (JIRA_PATTERN.matcher(normalizedMessage).matches()) {
                 double confidence = calculateJiraConfidence(normalizedMessage);
-                return new IntentAnalysisResult(IntentType.MCP_JIRA, confidence, "jira");
+                return new IntentAnalysisResult(IntentType.MCP, confidence, "jira");
             }
             
             // Check for Confluence-related keywords
             if (CONFLUENCE_PATTERN.matcher(normalizedMessage).matches()) {
                 double confidence = calculateConfluenceConfidence(normalizedMessage);
-                return new IntentAnalysisResult(IntentType.MCP_CONFLUENCE, confidence, "confluence");
+                return new IntentAnalysisResult(IntentType.MCP, confidence, "confluence");
             }
             
             // Default to LLM-only for general queries
-            return new IntentAnalysisResult(IntentType.LLM_ONLY, 0.9, "llm");
+            return new IntentAnalysisResult(IntentType.LLM, 0.9, "llm");
         });
     }
 

@@ -48,8 +48,14 @@ public class ChatOrchestrationService {
 
     private Mono<ChatResponse> processWithMcp(ChatRequest request, IntentAnalysisResult intent) {
         return switch (intent.type()) {
-            case MCP_JIRA -> processJiraRequest(request, intent);
-            case MCP_CONFLUENCE -> processConfluenceRequest(request, intent);
+            case MCP -> {
+                if ("jira".equals(intent.service())) {
+                    yield processJiraRequest(request, intent);
+                } else if ("confluence".equals(intent.service())) {
+                    yield processConfluenceRequest(request, intent);
+                }
+                yield processWithLlmOnly(request, intent);
+            }
             case HYBRID -> processHybridRequest(request, intent);
             default -> processWithLlmOnly(request, intent);
         };

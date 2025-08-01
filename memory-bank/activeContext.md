@@ -104,6 +104,13 @@ The application is now complete and ready for:
 3. End-to-end workflow validation
 4. Performance and error handling testing
 
+## Latest Updates (August 1, 2025)
+- ✅ Simplified IntentType enum values:
+  - MCP_JIRA/MCP_CONFLUENCE → MCP
+  - LLM_ONLY → LLM
+- Updated all references across codebase
+- Verified end-to-end functionality remains intact
+
 ## Latest Updates (July 31, 2025)
 - ✅ Fixed test configuration issues with property name mapping
 - ✅ Added test-specific application properties with correct naming
@@ -134,7 +141,7 @@ curl -X POST http://localhost:3336/api/chat/message \
   -d '{"message": "Show me all open JIRA issues", "userId": "test-user-jira-001"}'
 ```
 **Result**: ✅ SUCCESS
-- Intent type: "MCP_JIRA" 
+- Intent type: "MCP" (service: "jira")
 - Confidence: 0.8
 - mcpResult contains actual JIRA data from complete MCP chain
 - Returns 4 JIRA issues with proper formatting
@@ -146,7 +153,7 @@ curl -X POST http://localhost:3336/api/chat/message \
   -d '{"message": "Get details for issue SMP-1", "userId": "test-user-jira-002"}'
 ```
 **Result**: ✅ SUCCESS
-- Intent type: "MCP_JIRA"
+- Intent type: "MCP" (service: "jira")
 - Confidence: 0.75
 - mcpResult contains detailed issue information
 - Complete issue data retrieved via MCP chain
@@ -158,7 +165,7 @@ curl -X POST http://localhost:3336/api/chat/message \
   -d '{"message": "Hello, how are you today?", "userId": "test-user-001"}'
 ```
 **Result**: ✅ SUCCESS
-- Intent type: "LLM_ONLY"
+- Intent type: "LLM"
 - Confidence: 0.9
 - No MCP integration triggered (correct behavior)
 - Proper LLM response generated
