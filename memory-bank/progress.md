@@ -7,6 +7,7 @@
 - **Gradle Build System**: Complete build configuration with all dependencies
 - **Reactive Architecture**: WebFlux implementation for non-blocking operations
 - **Configuration Management**: Environment-based configuration with proper defaults
+- **Intent Type Simplification**: Consolidated MCP_JIRA/MCP_CONFLUENCE to MCP
 
 ### API Layer
 - **REST Endpoint**: `/api/chat` endpoint for processing user messages

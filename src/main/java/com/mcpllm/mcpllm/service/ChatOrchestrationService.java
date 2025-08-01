@@ -113,10 +113,7 @@ public class ChatOrchestrationService {
     }
 
     private Mono<ChatResponse> processWithLlmOnly(ChatRequest request, IntentAnalysisResult intent) {
-        String systemPrompt = "You are a helpful AI assistant. Provide clear, concise, and helpful responses.";
-        
-        return deepSeekService.generateResponse(request.message(), systemPrompt)
-            .map(response -> new ChatResponse(response, intent, null, true, null));
+        return Mono.just(new ChatResponse("", intent, null, true, null));
     }
 
     private Mono<String> generateContextualResponse(String userMessage, Map<String, Object> mcpResult, String service) {
