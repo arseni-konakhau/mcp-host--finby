@@ -1,191 +1,82 @@
-# MCP-LLM Active Context
+# Active Context
 
-## Current Work Focus
-Implementation of the complete MCP-LLM Spring Boot application that bridges natural language input with MCP tool execution for Atlassian services.
+This project is a Java Spring Boot application for MCP LLM orchestration and chat services.
+It exposes REST endpoints for chat and health checks, orchestrates intent analysis, and integrates with both LLM (DeepSeek) and MCP tools (Jira, Confluence).
+The codebase is organized into configuration, controller, model, and service layers, with HTTP validation scripts and Gradle build setup.
 
-## Recent Implementation Status
+## Key Components
+- **Controller:** Handles REST API requests (`/api/chat/message`, `/api/chat/health`)
+- **Service Layer:** Orchestrates chat, intent analysis, LLM and MCP tool integration
+- **Model Layer:** Defines request/response and intent data structures
+- **Configuration:** Manages properties, WebClient beans, and integration settings
+- **External Integrations:** DeepSeek LLM API, MCP backend for Jira/Confluence
+- **Build:** Gradle, Java 21, Spring Boot 3.5.3
 
-### Completed Components ✅
+---
 
-#### Core Application Structure
-- **McpLlmApplication.java**: Main Spring Boot application class
-- **build.gradle**: Complete Gradle configuration with all dependencies
-- **application.properties**: Environment-based configuration setup
-- **.env.example**: Template for environment variables
-- **README.md**: Comprehensive project documentation
+## REST Endpoints
 
-#### Configuration Layer
-- **DeepSeekProperties**: Configuration for DeepSeek API integration
-- **McpLlmProperties**: Application and MCP client configuration
-- **WebClientConfiguration**: HTTP client setup with timeouts and error handling
+- **POST /api/chat/message**  
+  Processes a chat message.  
+  - Input: `ChatRequest` (validated)
+  - Output: `ChatResponse` (wrapped in `ResponseEntity`)
+  - Delegates to: `ChatOrchestrationService.processMessage()`
 
-#### Model Layer
-- **IntentType**: Enum for MCP_ACTION, GENERAL_CHAT, CLARIFICATION
-- **IntentAnalysisResult**: Structured intent analysis response
-- **ChatRequest**: API request model with message and optional context
-- **ChatResponse**: API response model with message, intent, and tool results
+- **GET /api/chat/health**  
+  Health check endpoint.  
+  - Output: `"MCP-LLM Service is running"`
 
-#### Service Layer
-- **DeepSeekService**: Complete LLM integration with sophisticated prompt engineering
-- **IntentAnalysisService**: Advanced intent detection using structured prompts
-- **McpClientService**: MCP client communication with proper error handling
-- **ChatOrchestrationService**: Main coordination logic combining all services
+---
 
-#### Controller Layer
-- **ChatController**: REST API endpoint with validation and error handling
+## Service Layer
 
-#### Testing
-- **McpLlmApplicationTests**: Basic Spring Boot test structure
+- **ChatOrchestrationService:**  
+  Orchestrates chat message processing, intent analysis, and integration with MCP tools (Jira, Confluence) and LLMs.  
+  - Analyzes intent of incoming messages.
+  - Routes to MCP (Jira/Confluence) tool execution or LLM-only response.
+  - Handles hybrid intents, error fallback, and response formatting.
+  - Extracts tool names and parameters from user messages for Jira/Confluence.
+  - Formats and explains results using LLM if needed.
 
-### Current Implementation State
+- **DeepSeekService:**  
+  Handles communication with the DeepSeek LLM API.  
+  - Generates LLM responses for chat and contextual explanations.
+  - Provides intent analysis via LLM prompt.
+  - Handles API errors and timeouts gracefully.
 
-#### Build Status
-- ✅ Application compiles successfully
-- ✅ All dependencies resolved
-- ✅ Test compilation working
-- ✅ Gradle build passes
+- **IntentAnalysisService:**  
+  Detects user intent (Jira, Confluence, or LLM-only) using regex patterns and keyword scoring.
+  - Returns intent type, confidence, and service (jira/confluence/llm).
+  - Confidence is calculated based on keyword matches.
 
-#### Key Features Implemented
-1. **Natural Language Processing**: DeepSeek integration with context-aware prompting
-2. **Intent Analysis**: Sophisticated prompt engineering to determine user intent
-3. **MCP Tool Execution**: Integration with mcp-client for Jira/Confluence operations
-4. **Error Handling**: Comprehensive error handling with graceful degradation
-5. **Configuration Management**: Environment-based configuration for all services
-6. **Reactive Architecture**: Non-blocking I/O using Spring WebFlux
+- **McpClientService:**  
+  Integrates with MCP backend for Jira and Confluence tool execution.
+  - Executes Jira/Confluence tools and actions via HTTP.
+  - Handles errors and timeouts, returns error maps if needed.
+  - Can fetch available tools from MCP backend.
 
-## Next Steps
+---
 
-### Immediate Actions
-1. **Environment Setup**: Configure environment variables for testing
-2. **Integration Testing**: Test with actual mcp-client and DeepSeek API
-3. **Documentation Updates**: Update README with setup and usage instructions
+## Model Layer
 
-### Testing Requirements
-- Set up DeepSeek API token
-- Ensure mcp-client is running on localhost:3335
-- Test various natural language inputs
-- Validate MCP tool execution flow
+- **ChatRequest:** Represents incoming chat messages.
+- **ChatResponse:** Represents responses, including LLM/MCP results, intent, and error info.
+- **IntentAnalysisResult:** Holds intent type, confidence, and service.
+- **IntentType:** Enum for intent types (MCP, LLM, etc.).
 
-### Deployment Preparation
-- Container configuration
-- Health check endpoints
-- Monitoring setup
-- Production configuration
+---
 
-## Active Decisions and Considerations
+## Configuration
 
-### Architecture Decisions Made
-1. **Reactive Programming**: Chosen WebFlux for better scalability
-2. **Orchestration Pattern**: Central service coordinates all operations
-3. **Environment Configuration**: Externalized all sensitive configuration
-4. **Error Handling Strategy**: Graceful degradation with meaningful error messages
+- **McpLlmProperties:** Holds configuration for MCP/LLM integration (e.g., confidence thresholds, timeouts).
+- **DeepSeekProperties:** Holds DeepSeek LLM API config (URL, token, timeout).
+- **WebClientConfiguration:** Configures WebClient beans for HTTP calls to DeepSeek and MCP services.
+- **application.properties:** Stores property values for the above configs.
 
-### Current Challenges
-1. **Intent Analysis Accuracy**: Fine-tuning prompts for better intent detection
-2. **Parameter Extraction**: Ensuring accurate parameter extraction from natural language
-3. **Error Recovery**: Handling partial failures in multi-step operations
+---
 
-### Integration Points
-- **mcp-client**: Java service running on port 3335
-- **mcp-server--atlassian**: Python MCP server for Atlassian tools
-- **DeepSeek API**: External LLM service for natural language processing
+## External Integrations
 
-## Development Environment Status
-- ✅ Java 17 configured
-- ✅ Spring Boot 3.5.3 setup
-- ✅ Gradle build working
-- ✅ All source files created
-- ✅ Memory bank documentation complete
-
-## Ready for Testing
-The application is now complete and ready for:
-1. Environment variable configuration
-2. Integration testing with external services
-3. End-to-end workflow validation
-4. Performance and error handling testing
-
-## Latest Updates (August 1, 2025)
-- ✅ Simplified IntentType enum values:
-  - MCP_JIRA/MCP_CONFLUENCE → MCP
-  - LLM_ONLY → LLM
-- Updated all references across codebase
-- Verified end-to-end functionality remains intact
-
-## Latest Updates (July 31, 2025)
-- ✅ Fixed test configuration issues with property name mapping
-- ✅ Added test-specific application properties with correct naming
-- ✅ Resolved configuration validation errors for DeepSeekProperties
-- ✅ Build now passes successfully with all tests
-- ✅ Application is fully functional and ready for deployment
-- ✅ Memory bank documentation updated to reflect current status
-- ✅ All core functionality implemented and tested
-- ✅ **CRITICAL FIX**: Fixed ChatOrchestrationService MCP integration logic
-- ✅ **END-TO-END VALIDATION COMPLETE**: Full MCP chain working successfully
-- ✅ **PRODUCTION VALIDATED**: Live testing confirms all components working
-
-## Critical Fix Implemented (July 31, 2025)
-**Problem**: ChatOrchestrationService was not properly executing MCP operations despite correct intent analysis.
-
-**Solution**: Updated ChatOrchestrationService.java with proper MCP integration logic:
-1. **Enhanced Intent Analysis**: Improved logic to detect when MCP operations should be triggered
-2. **MCP Client Integration**: Added proper integration with MCP client service on localhost:3335
-3. **Response Processing**: Implemented logic to process MCP results and format them appropriately
-4. **Error Handling**: Added robust error handling for MCP operations
-
-## End-to-End Validation Results ✅
-
-### JIRA Query Validation
-```bash
-curl -X POST http://localhost:3336/api/chat/message \
-  -H "Content-Type: application/json" \
-  -d '{"message": "Show me all open JIRA issues", "userId": "test-user-jira-001"}'
-```
-**Result**: ✅ SUCCESS
-- Intent type: "MCP" (service: "jira")
-- Confidence: 0.8
-- mcpResult contains actual JIRA data from complete MCP chain
-- Returns 4 JIRA issues with proper formatting
-
-### Issue Details Query Validation
-```bash
-curl -X POST http://localhost:3336/api/chat/message \
-  -H "Content-Type: application/json" \
-  -d '{"message": "Get details for issue SMP-1", "userId": "test-user-jira-002"}'
-```
-**Result**: ✅ SUCCESS
-- Intent type: "MCP" (service: "jira")
-- Confidence: 0.75
-- mcpResult contains detailed issue information
-- Complete issue data retrieved via MCP chain
-
-### General Chat Validation
-```bash
-curl -X POST http://localhost:3336/api/chat/message \
-  -H "Content-Type: application/json" \
-  -d '{"message": "Hello, how are you today?", "userId": "test-user-001"}'
-```
-**Result**: ✅ SUCCESS
-- Intent type: "LLM"
-- Confidence: 0.9
-- No MCP integration triggered (correct behavior)
-- Proper LLM response generated
-
-## Complete MCP Chain Validation ✅
-The full end-to-end chain is now working perfectly:
-1. **MCP-Host (mcp-llm)** ✅ - Receives user queries and orchestrates responses
-2. **MCP-Client (localhost:3335)** ✅ - Bridges between host and server
-3. **MCP-Server (localhost:9000)** ✅ - Connects to Atlassian APIs
-
-## Current State Summary
-The MCP-LLM application is **COMPLETE**, **PRODUCTION-READY**, and **FULLY VALIDATED** with:
-- Full Spring Boot application with reactive architecture
-- Complete DeepSeek LLM integration
-- **WORKING MCP client communication layer**
-- Sophisticated intent analysis system
-- Comprehensive error handling
-- Environment-based configuration
-- Working test suite
-- Complete memory bank documentation
-- **END-TO-END VALIDATION COMPLETE**
-
-**Status**: PRODUCTION READY - All components validated and working in live environment
+- **DeepSeek LLM:** Used for generating chat responses and explanations.
+- **MCP Backend:** Used for executing Jira and Confluence tools/actions.
+- **HTTP Validation Scripts:** Present in `_http/` for testing endpoints and integrations.
