@@ -1,4 +1,4 @@
-# HOW TO:
+# MCP LLM - Step-by-Step Running Guide
 
 ## Foreground:
 
