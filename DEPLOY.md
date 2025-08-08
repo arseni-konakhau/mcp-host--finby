@@ -19,13 +19,15 @@ cd mcp-llm
 
 
 
-2. Environment Variables:
+2. Environment Variables and app configuration:
 
 ```bash
 cp ./_config_/env.selectel ./.env # example for intermediate target on selectel cloud
+
+cp ./_config_/application.properties.selectel ./src/main/resources/application.properties
 ```
 
-__NOTE: make sure you are using ur specific environment config based on target environment__
+__NOTE: make sure you are using your specific environment variables and app config based on target environment__
 
 
 
