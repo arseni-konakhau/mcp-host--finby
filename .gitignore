@@ -78,6 +78,7 @@ logs/
 *.tmp
 *.temp
 
+
 __bin__
 logs
 .DS_Store
