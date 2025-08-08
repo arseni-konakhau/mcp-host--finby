@@ -13,6 +13,7 @@
 1. Clone repository:
 ```bash
 git clone https://github.com/arseni-konakhau/mcp-llm.git
+
 cd mcp-llm
 ```
 
@@ -31,6 +32,7 @@ __NOTE: make sure you are using ur specific environment config based on target e
 3. Run with automated setup:
 ```bash
 chmod +x start.sh
+
 bash ./start.sh
 ```
 
