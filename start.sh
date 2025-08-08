@@ -34,7 +34,7 @@ fi
 # Source environment variables
 source .env
 SERVER_PORT=${SERVER_PORT:-3336}
-SERVER_ADDRESS=${SERVER_ADDRESS:-0.0.0.0}
+SERVER_ADDRESS=${SERVER_ADDRESS}
 
 echo "Starting application on ${SERVER_ADDRESS}:${SERVER_PORT}..."
 mkdir -p logs
