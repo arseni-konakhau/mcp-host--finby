@@ -27,6 +27,8 @@
 # CONFIGURATION
 # =============================================
 @baseUrl = http://localhost:3336
+# @baseUrl = http://87.228.101.211:3335
+
 @apiKey = your-api-key-here
 
 
