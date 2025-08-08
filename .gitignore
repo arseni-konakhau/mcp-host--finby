@@ -81,3 +81,4 @@ logs/
 
 *.pid
 __bin__
+src/main/resources/
