@@ -22,7 +22,9 @@ cd mcp-llm
 2. Environment Variables and app configuration:
 
 ```bash
-cp ./_config_/env.selectel ./.env # example for intermediate target on selectel cloud
+# following example for intermediate target on selectel cloud
+
+cp ./_config_/env.selectel ./.env
 
 cp ./_config_/application.properties.selectel ./src/main/resources/application.properties
 ```
