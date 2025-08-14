@@ -1,10 +1,10 @@
 # Application configuration
 spring.application.name=mcp-llm
-server.address=0.0.0.0
+server.address=localhost
 server.port=3336
 
 # MCP Client configuration
-mcp.client.url=http://0.0.0.0:3335
+mcp.client.url=http://localhost:3335
 mcp.client.timeout=30s
 
 # DeepSeek API configuration
