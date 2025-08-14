@@ -44,11 +44,11 @@ echo $! > mcp-llm.pid
 # Verify startup
 echo "Validating startup..."
 sleep 5
-curl -s http://${SERVER_ADDRESS}:${SERVER_PORT}/actuator/health | grep -q '"status":"UP"'
+curl -s https://${SERVER_ADDRESS}:${SERVER_PORT}/actuator/health | grep -q '"status":"UP"'
 if [ $? -eq 0 ]; then
   echo "Application is running successfully on ${SERVER_ADDRESS}:${SERVER_PORT}"
-  echo "Access: http://${SERVER_ADDRESS}:${SERVER_PORT}"
+  echo "Access: https://${SERVER_ADDRESS}:${SERVER_PORT}"
 else
-  echo "ERROR: Application failed to start (valid only for dev mode, so please check on public access for following address: http://${SERVER_ADDRESS}:${SERVER_PORT})"
+  echo "ERROR: Application failed to start (valid only for dev mode, so please check on public access for following address: https://${SERVER_ADDRESS}:${SERVER_PORT})"
   exit 1
 fi
