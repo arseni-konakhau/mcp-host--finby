@@ -1,10 +1,10 @@
 # Application configuration
 spring.application.name=mcp-llm
-server.address=localhost
+server.address=0.0.0.0
 server.port=3336
 
 # MCP Client configuration
-mcp.client.url=${MCP_CLIENT_URL:http://localhost:3335}
+mcp.client.url=http://0.0.0.0:3335
 mcp.client.timeout=30s
 
 # DeepSeek API configuration
@@ -31,4 +31,13 @@ management.endpoint.health.show-details=always
 
 # Logging
 logging.level.com.mcpllm=INFO
-logging.level.org.springframework.web.reactive.function.client=DEBUG
+logging.level.org.springframework.web.reactive.function.client=INFO
+
+# HTTPS:
+server.ssl.enabled=true
+server.ssl.protocol=TLS
+server.ssl.enabled-protocols=TLSv1.3
+server.ssl.key-store-type=PKCS12
+server.ssl.key-store=classpath:mcp-host-keystore.p12
+server.ssl.key-store-password=11111111111111
+server.ssl.key-alias=mcp-host-alias
