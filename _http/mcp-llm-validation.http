@@ -30,7 +30,11 @@
 # @baseUrl = http://87.228.101.211:3336
 
 
-### 1.1 Health Check - Basic connectivity test
+### 1.1 root
+GET {{baseUrl}}
+Accept: application/json
+
+### 1.1 version
 GET {{baseUrl}}/version
 Accept: application/json
 
