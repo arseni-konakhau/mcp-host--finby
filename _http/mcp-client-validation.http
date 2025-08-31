@@ -104,7 +104,7 @@ POST {{baseUrl}}/api/mcp/tools/jira_search/execute
 Content-Type: application/json
 
 {
-  "jql": "project = SMP ORDER BY created DESC",
+  "jql": "ORDER BY created DESC",
   "limit": 5,
   "fields": "summary,status,assignee,priority,updated"
 }

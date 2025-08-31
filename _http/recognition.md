@@ -11,7 +11,7 @@
             "properties": {
                 // each property has to be composed according to it's description in that JSON
                 // like in following example
-                "query": "",
+                "query": "text ~ \"Automatic\" and type = page",
                 "limit": "",
                 "spaces_filter": ""
             }
