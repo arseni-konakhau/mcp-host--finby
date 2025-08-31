@@ -34,6 +34,7 @@
 GET {{baseUrl}}
 Accept: application/json
 
+
 ### 1.1 version
 GET {{baseUrl}}/version
 Accept: application/json
