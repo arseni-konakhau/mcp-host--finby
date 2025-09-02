@@ -88,7 +88,6 @@ logs
 
 
 
-src/main/resourcess/
-src/main/resourcess/application.properties
+src/main/resources/application.properties
 *.crt
 *.p12
