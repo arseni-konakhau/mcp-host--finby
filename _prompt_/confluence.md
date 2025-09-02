@@ -1,3 +1,202 @@
+# MCP Host Recognition Process
+MCP - Model Context Protocol
+
+### User Input:
+`Looking for confluence pages where word "Жираф" is present, and as many pages I've got I need you to return whole content of each of them. Then I need you to analyze what this creature eats. Compose output `
+
+## Rules:
+- You have to recognize MCP Communication and provide list of MCP Calloust to obtain required info
+- "User Input" may include two types of information
+    - Related to MCP execution
+    - Regular request to LLM
+- Based on "User Input" we have to define MCP callouts to MCP Client in order to bring more context via MCP communication and then with this content we are going to engage "User Input" again to LLM to pefrom over whole inforamtion regular request to LLM. So this operation is intermediate in full cycle of communication between user and LLM.
+- I need you to reply in format to execute REST CLIENT calliut
+- I need no additional information and explanations but requests I have to make to my MCP Client
+- Follow examples below
+
+
+## Output Format:
+- set of taskss to MCP: http rest-client operations we have to perform in order to obtain additional information via MCP Server (using http format as presented below in example seciton)
+- Set of tasks to LLM after MCP returns result to augment the promt to LLM: just list of questions to LLM that is not matching MCP communication but need for whole informatioon aanlisys
+
+## Examples For Output:
+- here is the set of examples on how I colaborate to MCP Client
+- Based on fllowing examples I expect you to compose following http rest-client executions with proper order to achive resolution based on "User Input" (from above)
+- Make sure you follow "Rules" while you compose output
+```http
+### 3.1 Confluence Search - Basic
+POST {{baseUrl}}/api/mcp/tools/confluence_search/execute
+Content-Type: application/json
+
+{
+  "query": "project documentation",
+  "limit": 10
+}
+
+### Expected Response: Search results from Confluence
+
+### 3.2 Confluence Search with CQL
+POST {{baseUrl}}/api/mcp/tools/confluence_search/execute
+Content-Type: application/json
+
+{
+  "query": "type=page AND space=DEV",
+  "limit": 15
+}
+
+### Expected Response: CQL search results
+
+### 3.3 Confluence Search User
+POST {{baseUrl}}/api/mcp/tools/confluence_search_user/execute
+Content-Type: application/json
+
+{
+  "query": "user.fullname ~ \"John Doe\"",
+  "limit": 5
+}
+
+### Expected Response: User search results
+
+# =============================================
+# CONFLUENCE - PAGES
+# =============================================
+
+### 3.4 Get Confluence Page by ID
+POST {{baseUrl}}/api/mcp/tools/confluence_get_page/execute
+Content-Type: application/json
+
+{
+  "page_id": "123456789"
+}
+
+### Expected Response: Page content and metadata
+
+### 3.5 Get Confluence Page by Title and Space
+POST {{baseUrl}}/api/mcp/tools/confluence_get_page/execute
+Content-Type: application/json
+
+{
+  "title": "Project Documentation",
+  "space_key": "DEV"
+}
+
+### Expected Response: Page content and metadata
+
+### 3.6 Get Page Children
+POST {{baseUrl}}/api/mcp/tools/confluence_get_page_children/execute
+Content-Type: application/json
+
+{
+  "parent_id": "123456789",
+  "limit": 10
+}
+
+### Expected Response: List of child pages
+
+# =============================================
+# CONFLUENCE - COMMENTS
+# =============================================
+
+### 3.7 Get Page Comments
+POST {{baseUrl}}/api/mcp/tools/confluence_get_comments/execute
+Content-Type: application/json
+
+{
+  "page_id": "123456789"
+}
+
+### Expected Response: List of comments for the page
+
+### 3.8 Add Comment (Write Operation - if enabled)
+POST {{baseUrl}}/api/mcp/tools/confluence_add_comment/execute
+Content-Type: application/json
+
+{
+  "page_id": "123456789",
+  "content": "This comment was added via MCP Client for testing."
+}
+
+### Expected Response: Created comment object or error if read-only mode
+
+# =============================================
+# CONFLUENCE - LABELS
+# =============================================
+
+### 3.9 Get Page Labels
+POST {{baseUrl}}/api/mcp/tools/confluence_get_labels/execute
+Content-Type: application/json
+
+{
+  "page_id": "123456789"
+}
+
+### Expected Response: List of labels for the page
+
+### 3.10 Add Label (Write Operation - if enabled)
+POST {{baseUrl}}/api/mcp/tools/confluence_add_label/execute
+Content-Type: application/json
+
+{
+  "page_id": "123456789",
+  "name": "testing"
+}
+
+### Expected Response: Updated list of labels or error if read-only mode
+
+# =============================================
+# CONFLUENCE - PAGE MANAGEMENT (WRITE OPERATIONS)
+# =============================================
+
+### 3.11 Create Confluence Page (Write Operation - if enabled)
+POST {{baseUrl}}/api/mcp/tools/confluence_create_page/execute
+Content-Type: application/json
+
+{
+  "space_key": "DEV",
+  "title": "Test Page via MCP Client",
+  "content": "# Test Page\n\nThis page was created via MCP Client for testing.\n\n## Features Tested\n- MCP Client integration\n- Authentication\n- Page creation",
+  "content_format": "markdown"
+}
+
+### Expected Response: Created page object or error if read-only mode
+
+### 3.12 Update Confluence Page (Write Operation - if enabled)
+POST {{baseUrl}}/api/mcp/tools/confluence_update_page/execute
+Content-Type: application/json
+
+{
+  "page_id": "123456789",
+  "title": "Updated Test Page via MCP Client",
+  "content": "# Updated Test Page\n\nThis page was updated via MCP Client.\n\n## Updated Features\n- MCP Client integration\n- Authentication\n- Page updates",
+  "content_format": "markdown"
+}
+
+### Expected Response: Updated page object or error if read-only mode
+
+### 3.13 Delete Confluence Page (Write Operation - if enabled)
+POST {{baseUrl}}/api/mcp/tools/confluence_delete_page/execute
+Content-Type: application/json
+
+{
+  "page_id": "999999999"
+}
+
+### Expected Response: Success confirmation or error if read-only mode
+```
+
+
+
+
+
+
+
+
+### List of Available Tools For Confluence (using YAML)
+
+- This is list of available tools of MCP Server for Atlassian
+- Based on this information you have to compse expected result "Output" properly
+
+```yaml
 - name: confluence_search
   description: |
     Search Confluence content using simple terms or CQL.
@@ -522,3 +721,5 @@
     required:
       - query
     type: object
+
+```
