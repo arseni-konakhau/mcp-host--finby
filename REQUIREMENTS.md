@@ -13,12 +13,12 @@ the source of access to LLM `_http_/deepseek.http`. Here is the REST Client entr
 - _http_/mcp-tools.json
 
 #### Confluence
-_http_/mcp-tools-confluence.yaml
-_http_/mcp-tools-confluence.json
+- _http_/mcp-tools-confluence.yaml
+- _http_/mcp-tools-confluence.json
 
 #### Jira
-_http_/mcp-tools-jira.yaml
-_http_/mcp-tools-jira.json
+- _http_/mcp-tools-jira.yaml
+- _http_/mcp-tools-jira.json
 
 
 
@@ -32,4 +32,10 @@ _http_/mcp-tools-jira.json
 - tools: 10856 tokens 43425 characters 16023 words (55 KB)
     - jira: 7753 tokens 31012 characters 11513 words (40 KB)
     - confluence: 3103 tokens 12412 characters 4511 words (16 KB)
+
+
+
+
+
+
 
