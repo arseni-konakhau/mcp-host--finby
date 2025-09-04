@@ -1,8 +1,3 @@
-# PROMPT
-
-
-
-
 # MCP Host Recognition Process
 MCP - Model Context Protocol
 
