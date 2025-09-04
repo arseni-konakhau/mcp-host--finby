@@ -1,0 +1,84 @@
+@baseUrl = http://localhost:3337/api
+
+### 1. Root endpoint
+GET {{baseUrl}}/
+Accept: application/json
+
+### 2. Version information
+GET {{baseUrl}}/version
+Accept: application/json
+
+### 3. Simple chat (uses all defaults)
+POST {{baseUrl}}/chat
+Content-Type: application/json
+
+{
+  "message": "hello"
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+### 4. Chat with model selection only
+POST {{baseUrl}}/chat
+Content-Type: application/json
+
+{
+  "message": "Solve this logic problem step by step",
+  "model": "deepseek-reasoner"
+}
+
+### 5. Chat with parameter adjustments
+POST {{baseUrl}}/chat
+Content-Type: application/json
+
+{
+  "message": "Write a creative story about space exploration",
+  "temperature": 1.5,
+  "maxTokens": 800
+}
+
+### 6. Full parameter control
+POST {{baseUrl}}/chat
+Content-Type: application/json
+
+{
+  "message": "Provide a technical analysis of blockchain technology",
+  "model": "deepseek-chat",
+  "temperature": 0.3,
+  "maxTokens": 1200,
+  "topP": 0.7,
+  "frequencyPenalty": 0.8,
+  "presencePenalty": 0.2
+}
+
+### 7. Short creative response
+POST {{baseUrl}}/chat
+Content-Type: application/json
+
+{
+  "message": "Write a haiku about artificial intelligence",
+  "temperature": 1.8,
+  "maxTokens": 50
+}
+
+### 8. Precise technical response
+POST {{baseUrl}}/chat
+Content-Type: application/json
+
+{
+  "message": "Explain the difference between TCP and UDP protocols",
+  "model": "deepseek-reasoner",
+  "temperature": 0.1,
+  "maxTokens": 500
+}
