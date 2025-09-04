@@ -2,7 +2,9 @@
 MCP - Model Context Protocol
 
 ### User Input:
-`Looking for confluence pages where word "Жираф" is present, and as many pages I've got I need you to return whole content of each of them. Then I need you to analyze what this creature eats. Compose output `
+```
+Looking for confluence pages where word "Жираф" is present, and as many pages I've got I need you to return whole content of each of them. Then I need you to analyze what this creature eats. Compose output
+```
 
 
 ## Rules:
@@ -20,12 +22,12 @@ MCP - Model Context Protocol
 - set of taskss to MCP: http rest-client operations we have to perform in order to obtain additional information via MCP Server (using http format as presented below in example seciton)
 - Set of tasks to LLM after MCP returns result to augment the promt to LLM: just list of questions to LLM that is not matching MCP communication but need for whole informatioon aanlisys
 
-
 ## Examples For Output:
 - here is the set of examples on how I colaborate to MCP Client
 - Based on fllowing examples I expect you to compose following http rest-client executions with proper order to achive resolution based on "User Input" (from above)
 - Make sure you follow "Rules" while you compose output
-```http
+
+```t
 ### 3.1 Confluence Search - Basic
 POST {{baseUrl}}/api/mcp/tools/confluence_search/execute
 Content-Type: application/json
@@ -196,7 +198,9 @@ Content-Type: application/json
 ### List of Available Tools For Confluence (using YAML)
 
 - This is list of available tools of MCP Server for Atlassian
+- it is described by creator of MCP Server of Atlassian itself
 - Based on this information you have to compse expected result "Output" properly
+- Let's consider that information as documented tool set
 
 ```yaml
 - name: confluence_search
