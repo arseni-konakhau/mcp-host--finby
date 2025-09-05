@@ -1,12 +1,16 @@
-# MCP Host Recognition Process
-MCP - Model Context Protocol
+# MCP Resolution
+MCP - Model Context Protocol. This document stands for resolution of user input for the matter access or not MCP Servers available in the scope of current app
 
 
 
-### User Input:
+
+
+### Context
 ```
 Looking for confluence pages where word "Жираф" is present, and as many pages I've got I need you to return whole content of each of them. Then I need you to analyze what this creature eats. Compose output as table. Keep it simple with no additinal data.
 ```
+
+
 
 
 
@@ -19,10 +23,6 @@ Looking for confluence pages where word "Жираф" is present, and as many pag
 - I need you to reply in format to execute REST CLIENT calliut
 - I need no additional information and explanations but requests I have to make to my MCP Client
 - Follow examples below
-
-
-
-## Output Format:
 - I need complete list of tasks we have to make 
     - LLM
     - MCP
@@ -34,7 +34,8 @@ Looking for confluence pages where word "Жираф" is present, and as many pag
 - Each task shold look like JSON data:
 - I need you to create data structure that shows order of execution for tasks, cuz some of tasks need to be executed after another tasks and this execution process may be multi dimentional *
 
-### Example For Task Representation:
+
+## Flow Components Format:
 
 #### User Input:
 `search in Confluence for name John and calculate how many times it was mentioned`
@@ -42,21 +43,18 @@ Looking for confluence pages where word "Жираф" is present, and as many pag
 this example of user input should produce
 - search for all pages where "John" is mentioned
 - extract whole content from each page
-- 
+- input property includes:
+    - for MCP: that should include properties from tools populated accordingly (so properties from tools is the matter of MCP task)
+    - for LLM: include `query` property with content that defines llm task
+    - for PROCESSING: include `query` property with content that defines llm task similar to llm but include following prompt guide (this current document) to achieve same resolution for defining following takss (MCP, LLM). So let's treat this option as correction of iniitaly defined plan for MCP resolution
+
+
+
+
+
+
 
 #### Example For Task of MCP:
-```json
-{
-    "index": 0,
-    "type": "MCP",
-    "tool": "confluence_search",
-    "input": {
-        "query": "John",
-        "limit": 15
-    }
-}
-```
-
 ```json
 {
     "index": 0,
@@ -72,14 +70,27 @@ this example of user input should produce
 #### Example For Task of LLM:
 ```json
 {
+    "index": 0,
+    "type": "PROCESSING",
+    "tool": "",
+    "input": {
+        "query": "extract word \"John\" from current context and enumerated them", // this is not good example, follow explanation for PROCESSING
+    }
+}
+```
+
+#### Example For Task of LLM:
+```json
+{
     "index": 2,
     "type": "LLM",
-    "tool": "search",
+    "tool": "",
     "input": {
         "query": "extract word \"John\" from current context and enumerated them"
     }
 }
 ```
+
 
 
 
