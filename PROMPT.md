@@ -5,7 +5,7 @@ MCP - Model Context Protocol. This document stands for resolution of user input 
 
 
 
-### Context
+## Context
 ```
 Looking for confluence pages where word "Жираф" is present, and as many pages I've got I need you to return whole content of each of them. Then I need you to analyze what this creature eats. Compose output as table. Keep it simple with no additinal data.
 ```
@@ -35,11 +35,12 @@ Looking for confluence pages where word "Жираф" is present, and as many pag
 - I need you to create data structure that shows order of execution for tasks, cuz some of tasks need to be executed after another tasks and this execution process may be multi dimentional *
 
 
-## Flow Components Format:
 
-#### User Input:
-`search in Confluence for name John and calculate how many times it was mentioned`
 
+
+## Format:
+
+### Format Criteria:
 this example of user input should produce
 - search for all pages where "John" is mentioned
 - extract whole content from each page
@@ -52,7 +53,10 @@ this example of user input should produce
 
 
 
+### Examples:
 
+#### User Input:
+`search in Confluence for name John and calculate how many times it was mentioned`
 
 #### Example For Task of MCP:
 ```json
@@ -630,3 +634,5 @@ this example of user input should produce
     type: object
 
 ```
+
+## MCP Client
